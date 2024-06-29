@@ -74,7 +74,7 @@ locals {
 
 # Fallback Subnet ID
 locals {
-  fallback_subnet_id = "subnet-0bb1c79de3EXAMPLE" # Replace with an actual subnet ID in your VPC
+  fallback_subnet_id = "subnet-003bb6d90700d4b0e" # Replace with an actual subnet ID in your VPC
 }
 
 # Ensure at least one subnet is available
