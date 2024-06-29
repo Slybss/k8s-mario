@@ -84,7 +84,7 @@ locals {
 
 # Provision EKS Cluster
 resource "aws_eks_cluster" "example" {
-  name     = "NNAMDI_EKS_CLOUD"
+  name     = "SYLVUDE_EKS_CLOUD"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
