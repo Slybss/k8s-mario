@@ -72,13 +72,23 @@ locals {
   ]
 }
 
+# Fallback Subnet ID
+locals {
+  fallback_subnet_id = "subnet-0bb1c79de3EXAMPLE" # Replace with an actual subnet ID in your VPC
+}
+
+# Ensure at least one subnet is available
+locals {
+  effective_public_subnet_ids = length(local.public_subnet_ids) > 0 ? local.public_subnet_ids : [local.fallback_subnet_id]
+}
+
 # Provision EKS Cluster
 resource "aws_eks_cluster" "example" {
-  name     = "SYLVUDE_EKS_CLOUD"
+  name     = "NNAMDI_EKS_CLOUD"
   role_arn = aws_iam_role.example.arn
 
   vpc_config {
-    subnet_ids = local.public_subnet_ids
+    subnet_ids = local.effective_public_subnet_ids
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
@@ -128,7 +138,7 @@ resource "aws_eks_node_group" "example" {
   cluster_name    = aws_eks_cluster.example.name
   node_group_name = "Node-cloud"
   node_role_arn   = aws_iam_role.node_group.arn
-  subnet_ids      = local.public_subnet_ids
+  subnet_ids      = local.effective_public_subnet_ids
 
   scaling_config {
     desired_size = 1
