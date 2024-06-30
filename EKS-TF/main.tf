@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "assume_role_ec2" {
 
 # Create IAM Role for EKS Cluster
 resource "aws_iam_role" "example" {
-  name               = "eks-cluster-cloud1"
+  name               = "eks-cluster-cloud12"
   assume_role_policy = data.aws_iam_policy_document.assume_role_eks.json
 }
 
